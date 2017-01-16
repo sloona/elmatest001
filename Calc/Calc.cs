@@ -10,7 +10,37 @@ namespace Calc
     {
         public int Sum(int x, int y)
         {
-            return  x + y;
+            //return  x + y;
+            return (int)Execute("Sum", new object[] { x, y});
+        }
+
+        public Calc(IOperation[] opers)
+        {
+            operations = opers;
+        }
+
+        private IOperation[] operations { get; set; }
+
+        public object Execute(string name, object[] args)
+        {
+            var oper = operations.FirstOrDefault(o=> o.Name == name);
+            return oper.Execute(args);
+        }
+    }
+
+    public interface IOperation
+    {
+        string Name { get; }
+        //object Execute(object x, object y);
+        object Execute(object[] args);
+    }
+
+    public class SumOperation : IOperation
+    {
+        public string Name { get { return "Sum"; } }
+        public object Execute(object[] args)
+        {
+            return (int)args[0] + (int)args[1];
         }
     }
 }
