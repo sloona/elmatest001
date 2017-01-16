@@ -11,7 +11,7 @@ namespace Calc
         public int Sum(int x, int y)
         {
             //return  x + y;
-            return (int)Execute("Sum", new object[] { x, y});
+            return (int)Execute("Sum", new object[] { x, y });
         }
 
         public Calc(IOperation[] opers)
@@ -23,8 +23,14 @@ namespace Calc
 
         public object Execute(string name, object[] args)
         {
-            var oper = operations.FirstOrDefault(o=> o.Name == name);
-            return oper.Execute(args);
+            var oper = operations.FirstOrDefault(o => o.Name == name);
+            if (oper != null)
+            {
+                return oper.Execute(args);
+            } else {
+                return "Операция " + name + " не описана";
+            }
+            
         }
     }
 
@@ -35,12 +41,73 @@ namespace Calc
         object Execute(object[] args);
     }
 
+    /// <summary>
+    /// Сложение
+    /// </summary>
     public class SumOperation : IOperation
     {
         public string Name { get { return "Sum"; } }
         public object Execute(object[] args)
         {
             return (int)args[0] + (int)args[1];
+        }
+    }
+
+    /// <summary>
+    /// Умножение, два аргумента
+    /// </summary>
+    public class MultiplyOperation : IOperation
+    {
+        public string Name { get { return "Multiply"; } }
+        public object Execute(object[] args)
+        {
+            try {
+                return (int)args[0] * (int)args[1];
+            }
+            catch (Exception ex)
+            {
+                return "Ошибка в операции " + Name + Environment.NewLine + ex;
+            }
+        }
+    }
+
+    /// <summary>
+    ///Возведение в квадрат, один аргумент 
+    /// </summary>
+    public class SquareOperation : IOperation
+    {
+        public string Name { get { return "Square"; } }
+        public object Execute(object[] args)
+        {
+            try
+            {
+                return (int)args[0] * (int)args[0];
+            }
+            catch (Exception ex)
+            {
+                return "Ошибка в операции " + Name + Environment.NewLine + ex;
+            }
+        }
+    }
+    /// <summary>
+    /// Сложение комплексных чисел, четыре аргумента
+    /// </summary>
+    public class ComplexSumOperation : IOperation
+    {
+        public string Name { get { return "ComplexSum"; } }
+        public object Execute(object[] args)
+        {
+            try
+            {
+                int[] complex = new int[2];
+                complex[0] = (int)args[0] + (int)args[2];
+                complex[1] = (int)args[1] + (int)args[3];
+                return complex;
+            }
+            catch (Exception ex)
+            {
+                return "Ошибка в операции " + Name + Environment.NewLine + ex;
+            }
         }
     }
 }
