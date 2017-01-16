@@ -32,5 +32,21 @@ namespace UnitTestProject1
             Assert.AreEqual(result4, 4);
             Assert.AreEqual(result5, 8);
         }
+
+        [TestMethod]
+        public void MultiplyTest()
+        {
+            var calc = new C.Calc(new Calc.IOperation[] { new Calc.MultiplyOperation() });
+            var result1 = calc.Execute("Multiply", new object[] { 3, 5 });
+            Assert.AreEqual(result1, 15);
+        }
+
+        [TestMethod]
+        public void SquareTest()
+        {
+            var calc = new C.Calc(new Calc.IOperation[] { new Calc.SquareOperation() });
+            var result1 = calc.Execute("Square", new object[] { 5 });
+            Assert.AreEqual(result1, 25);
+        }
     }
 }
