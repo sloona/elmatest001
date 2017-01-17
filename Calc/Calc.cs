@@ -32,7 +32,7 @@ namespace Calc
 
         public object Execute(string name, object[] args)
         {
-            var oper = operations.FirstOrDefault(o => o.Name == name);
+            var oper = operations.FirstOrDefault(o => o.Name.ToLower() == name.ToLower());
             if (oper != null)
             {
                 return oper.Execute(args);
@@ -74,7 +74,7 @@ namespace Calc
         public object Execute(object[] args)
         {
             try {
-                return (int)args[0] * (int)args[1];
+                return Convert.ToInt32(args[0]) * Convert.ToInt32(args[1]);
             }
             catch (Exception ex)
             {

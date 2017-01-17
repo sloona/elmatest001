@@ -33,9 +33,11 @@ namespace ConsoleApplication1
 
             var operations = new List<IOperation>();
 
+            #region Получение всех возможных операций
+            // найти файлы dll и exe в текущей директории
             var files = Directory.GetFiles(Environment.CurrentDirectory, "*.exe")
                 .Union(Directory.GetFiles(Environment.CurrentDirectory, "*.dll"));
-            //загрузить из
+            //загрузить их
             foreach (var file in files)
             {
                 // Console.WriteLine(file);
@@ -46,9 +48,9 @@ namespace ConsoleApplication1
 
                 foreach (var type in types)
                 {
-
                     //Console.WriteLine(type.Name);//нашли типы, но все
                     var interfaces = type.GetInterfaces();
+                    // найти реализацюию интерфейса IOperation
                     if (interfaces.Contains(typeof(IOperation)))
                     {
                         //Console.WriteLine(type.Name);
@@ -59,14 +61,9 @@ namespace ConsoleApplication1
                             operations.Add(oper);
                         }
                     }
-
-
-                    //foreach (var interf in interfaces) {
-                    //Console.WriteLine(interf.Name);
-                    //}
                 }
             }
-
+            #endregion
             //найти реализацию exe IOperation
             //создать экземпляр класса
             //передаем все эти экземпляры в class
@@ -76,7 +73,7 @@ namespace ConsoleApplication1
             var parameters = args.Skip(1).ToArray(); //Select(a => (object)a);
 
             var result = calc.Execute(activeoper, parameters);
-            Console.WriteLine($"Pi: {result}");
+            Console.WriteLine($"result = {result}");
 
             Console.ReadKey();
         }

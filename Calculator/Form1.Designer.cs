@@ -31,13 +31,13 @@
             this.comboBox1 = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.Parameters = new System.Windows.Forms.GroupBox();
             this.textBox4 = new System.Windows.Forms.TextBox();
             this.textBox3 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.lblResult = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
-            this.groupBox1.SuspendLayout();
+            this.Parameters.SuspendLayout();
             this.SuspendLayout();
             // 
             // comboBox1
@@ -64,36 +64,36 @@
             this.textBox1.Size = new System.Drawing.Size(70, 20);
             this.textBox1.TabIndex = 2;
             // 
-            // groupBox1
+            // Parameters
             // 
-            this.groupBox1.Controls.Add(this.textBox4);
-            this.groupBox1.Controls.Add(this.textBox3);
-            this.groupBox1.Controls.Add(this.textBox2);
-            this.groupBox1.Controls.Add(this.textBox1);
-            this.groupBox1.Location = new System.Drawing.Point(206, 12);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(200, 200);
-            this.groupBox1.TabIndex = 3;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
+            this.Parameters.Controls.Add(this.textBox4);
+            this.Parameters.Controls.Add(this.textBox3);
+            this.Parameters.Controls.Add(this.textBox2);
+            this.Parameters.Controls.Add(this.textBox1);
+            this.Parameters.Location = new System.Drawing.Point(206, 12);
+            this.Parameters.Name = "Parameters";
+            this.Parameters.Size = new System.Drawing.Size(200, 200);
+            this.Parameters.TabIndex = 3;
+            this.Parameters.TabStop = false;
+            this.Parameters.Text = "groupBox1";
             // 
             // textBox4
             // 
-            this.textBox4.Location = new System.Drawing.Point(15, 45);
+            this.textBox4.Location = new System.Drawing.Point(15, 112);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(70, 20);
             this.textBox4.TabIndex = 5;
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(15, 71);
+            this.textBox3.Location = new System.Drawing.Point(15, 77);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(70, 20);
             this.textBox3.TabIndex = 4;
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(15, 108);
+            this.textBox2.Location = new System.Drawing.Point(15, 45);
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(70, 20);
             this.textBox2.TabIndex = 3;
@@ -122,14 +122,14 @@
             this.ClientSize = new System.Drawing.Size(570, 262);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.lblResult);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.Parameters);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.comboBox1);
             this.Name = "Form1";
             this.Text = "Calculator";
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.Parameters.ResumeLayout(false);
+            this.Parameters.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -140,7 +140,7 @@
         private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox Parameters;
         private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.TextBox textBox2;

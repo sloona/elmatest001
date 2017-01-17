@@ -22,4 +22,20 @@ namespace SuperOperation
             return "Therma";
         }
     }
+
+    //public class MySum : IOperation
+    //{
+    //    public string Name
+    //    {
+    //        get
+    //        {
+    //            return "MySum";
+    //        }
+    //    }
+
+    //    public object Execute(object[] args)
+    //    {
+    //        return Convert.ToInt32(args[0]) + Convert.ToInt32(args[1]) + Convert.ToInt32(args[2]);
+    //    }
+    //}
 }

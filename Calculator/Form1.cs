@@ -25,15 +25,17 @@ namespace Calculator
         /// </summary>
         private Calc.Calc Calc { get; set; }
 
-        private IEnumerable<string> OperationNames {get; set;}
+        private IEnumerable<string> OperationNames { get; set; }
 
         private void Form1_Load(object sender, EventArgs e)
         {
             var operations = new List<IOperation>();
 
+            #region Получение всех возможных операций
+            // найти файлы dll и exe в текущей директории
             var files = Directory.GetFiles(Environment.CurrentDirectory, "*.exe")
                 .Union(Directory.GetFiles(Environment.CurrentDirectory, "*.dll"));
-            //загрузить из
+            //загрузить их
             foreach (var file in files)
             {
                 // Console.WriteLine(file);
@@ -44,9 +46,9 @@ namespace Calculator
 
                 foreach (var type in types)
                 {
-
                     //Console.WriteLine(type.Name);//нашли типы, но все
                     var interfaces = type.GetInterfaces();
+                    // найти реализацюию интерфейса IOperation
                     if (interfaces.Contains(typeof(IOperation)))
                     {
                         //Console.WriteLine(type.Name);
@@ -57,24 +59,17 @@ namespace Calculator
                             operations.Add(oper);
                         }
                     }
-
-
-                    //foreach (var interf in interfaces) {
-                    //Console.WriteLine(interf.Name);
-                    //}
                 }
             }
+            #endregion
 
-            //найти реализацию exe IOperation
-            //создать экземпляр класса
-            //передаем все эти экземпляры в class
-
-            var Calc = new Calc.Calc(operations);
+            Calc = new Calc.Calc(operations);
 
             OperationNames = Calc.GetOperationsNames();
+            //заполнить комбобокс
             FillCombobox();
 
-            //заполнить комбобокс
+            
         }
 
         private void FillCombobox()
@@ -84,7 +79,19 @@ namespace Calculator
 
         private void button1_Click(object sender, EventArgs e)
         {
-            lblResult.Text = comboBox1.Text;
+            List<object> parameters = new List<object>();
+
+            parameters.Add(textBox1.Text);
+            parameters.Add(textBox2.Text);
+            parameters.Add(textBox3.Text);
+            parameters.Add(textBox4.Text);
+
+            var args = parameters.ToArray();
+
+            var activeoper = comboBox1.Text.ToString();
+            
+            var result = Calc.Execute(activeoper, args);
+            lblResult.Text = result.ToString(); //comboBox1.Text;
         }
     }
 }
