@@ -19,7 +19,11 @@ namespace Calc
             operations = opers;
         }
 
-        private IOperation[] operations { get; set; }
+        public Calc(IEnumerable<IOperation> opers)
+        {
+            operations = opers;
+        }
+        private IEnumerable<IOperation> operations { get; set; }
 
         public object Execute(string name, object[] args)
         {
@@ -49,7 +53,10 @@ namespace Calc
         public string Name { get { return "Sum"; } }
         public object Execute(object[] args)
         {
-            return (int)args[0] + (int)args[1];
+            var x = Convert.ToInt32(args[0]);
+            var y = Convert.ToInt32(args[1]);
+            //return (int)args[0] + (int)args[1];
+            return x + y;
         }
     }
 
