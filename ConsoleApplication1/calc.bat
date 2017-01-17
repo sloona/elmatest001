@@ -1,0 +1,1 @@
+bin/Debug/calc.exe "th"

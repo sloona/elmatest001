@@ -25,6 +25,11 @@ namespace Calc
         }
         private IEnumerable<IOperation> operations { get; set; }
 
+        public IEnumerable<string> GetOperationsNames()
+        {
+            return operations.Select(o => o.Name);
+        }
+
         public object Execute(string name, object[] args)
         {
             var oper = operations.FirstOrDefault(o => o.Name == name);
