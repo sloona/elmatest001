@@ -89,8 +89,9 @@ namespace Calculator
             var args = parameters.ToArray();
 
             var activeoper = comboBox1.Text.ToString();
-            
-            var result = Calc.Execute(activeoper, args.Count(), args);
+
+            //var result = Calc.Execute(activeoper, args.Count(), args);
+            var result = Calc.Execute(activeoper, args);
             lblResult.Text = result.ToString(); //comboBox1.Text;
         }
     }

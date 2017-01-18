@@ -73,7 +73,8 @@ namespace ConsoleApplication1
             var parameters = args.Skip(1).ToArray(); //Select(a => (object)a);
             var argnum = parameters.Count();
 
-            var result = calc.Execute(activeoper, argnum, parameters);
+            //var result = calc.Execute(activeoper, argnum, parameters);
+            var result = calc.Execute(activeoper, parameters);
             Console.WriteLine($"result = {result}");
 
             Console.ReadKey();
