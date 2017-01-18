@@ -11,7 +11,7 @@ namespace Calc
         public int Sum(int x, int y)
         {
             //return  x + y;
-            return (int)Execute("Sum", new object[] { x, y });
+            return (int)Execute("Sum", 2, new object[] { x, y });
         }
 
         public Calc(IOperation[] opers)
@@ -27,12 +27,12 @@ namespace Calc
 
         public IEnumerable<string> GetOperationsNames()
         {
-            return operations.Select(o => o.Name);
+            return operations.Select(o => o.Name).Distinct();
         }
 
-        public object Execute(string name, object[] args)
+        public object Execute(string name, int argnum, object[] args)
         {
-            var oper = operations.FirstOrDefault(o => o.Name.ToLower() == name.ToLower());
+            var oper = operations.FirstOrDefault(o => o.Name.ToLower() == name.ToLower() && o.ArgsNum == args.Count());
             if (oper != null)
             {
                 return oper.Execute(args);
@@ -46,6 +46,7 @@ namespace Calc
     public interface IOperation
     {
         string Name { get; }
+        int ArgsNum { get; }
         //object Execute(object x, object y);
         object Execute(object[] args);
     }
@@ -56,6 +57,7 @@ namespace Calc
     public class SumOperation : IOperation
     {
         public string Name { get { return "Sum"; } }
+        public int ArgsNum { get { return 2; } }
         public object Execute(object[] args)
         {
             var x = Convert.ToInt32(args[0]);
@@ -71,6 +73,7 @@ namespace Calc
     public class MultiplyOperation : IOperation
     {
         public string Name { get { return "Multiply"; } }
+        public int ArgsNum { get { return 2; } }
         public object Execute(object[] args)
         {
             try {
@@ -89,6 +92,7 @@ namespace Calc
     public class SquareOperation : IOperation
     {
         public string Name { get { return "Square"; } }
+        public int ArgsNum { get { return 1; } }
         public object Execute(object[] args)
         {
             try
@@ -107,6 +111,7 @@ namespace Calc
     public class ComplexSumOperation : IOperation
     {
         public string Name { get { return "ComplexSum"; } }
+        public int ArgsNum { get { return 4; } }
         public object Execute(object[] args)
         {
             try

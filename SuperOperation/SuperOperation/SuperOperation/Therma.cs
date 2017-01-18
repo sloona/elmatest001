@@ -17,25 +17,34 @@ namespace SuperOperation
             }
         }
 
+        public int ArgsNum { get { return 0; } }
+
         public object Execute(object[] args)
         {
             return "Therma";
         }
     }
 
-    //public class MySum : IOperation
-    //{
-    //    public string Name
-    //    {
-    //        get
-    //        {
-    //            return "MySum";
-    //        }
-    //    }
+    public class MySum : IOperation
+    {
+        public string Name
+        {
+            get
+            {
+                return "MySum";
+            }
+        }
 
-    //    public object Execute(object[] args)
-    //    {
-    //        return Convert.ToInt32(args[0]) + Convert.ToInt32(args[1]) + Convert.ToInt32(args[2]);
-    //    }
-    //}
+        public int ArgsNum { get { return 2; } }
+
+        public object Execute(object[] args)
+        {
+            return Convert.ToInt32(args[0]) + Convert.ToInt32(args[1]);
+        }
+
+        //public object Execute(object arg1, object arg2)
+        //{
+        //    return Convert.ToInt32(arg1) + Convert.ToInt32(arg2);
+        //}
+    }
 }

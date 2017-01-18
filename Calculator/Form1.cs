@@ -81,16 +81,16 @@ namespace Calculator
         {
             List<object> parameters = new List<object>();
 
-            parameters.Add(textBox1.Text);
-            parameters.Add(textBox2.Text);
-            parameters.Add(textBox3.Text);
-            parameters.Add(textBox4.Text);
+            if (!string.IsNullOrEmpty(textBox1.Text)) parameters.Add(textBox1.Text);
+            if (!string.IsNullOrEmpty(textBox2.Text)) parameters.Add(textBox2.Text);
+            if (!string.IsNullOrEmpty(textBox3.Text)) parameters.Add(textBox3.Text);
+            if (!string.IsNullOrEmpty(textBox4.Text)) parameters.Add(textBox4.Text);
 
             var args = parameters.ToArray();
 
             var activeoper = comboBox1.Text.ToString();
             
-            var result = Calc.Execute(activeoper, args);
+            var result = Calc.Execute(activeoper, args.Count(), args);
             lblResult.Text = result.ToString(); //comboBox1.Text;
         }
     }
