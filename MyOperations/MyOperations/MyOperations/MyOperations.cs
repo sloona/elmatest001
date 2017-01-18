@@ -17,10 +17,17 @@ namespace MyOperations
             }
         }
 
+        public int ArgsNum { get { return 3; } }
+
         public object Execute(object[] args)
         {
-            return Convert.ToInt32(args[0]) + Convert.ToInt32(args[1]);
+            return Convert.ToInt32(args[0]) + Convert.ToInt32(args[1]) + Convert.ToInt32(args[2]);
         }
+
+        //public object Execute(object arg1, object arg2, object arg3)
+        //{
+        //    return Convert.ToInt32(arg1) + Convert.ToInt32(arg2) + Convert.ToInt32(arg3);
+        //}
     }
 
     public class MyMultilpy : IOperation
@@ -32,6 +39,8 @@ namespace MyOperations
                 return "MyMultilpy";
             }
         }
+
+        public int ArgsNum { get { return 2; } }
 
         public object Execute(object[] args)
         {
