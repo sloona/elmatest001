@@ -18,7 +18,7 @@ namespace Web.Controllers
         }
 
         public ActionResult Execute(OperationModel model) {
-            var calc = new Calc.Calc(new IOperation[] { new SumOperation() });
+            var calc = new Calc.Calc(new IOperation[] { new SumOperation(), new MultiplyOperation() });
             //var result = calc.Execute(funcName, new object[] { x, y});
             var result = calc.Execute(model.Name, model.GetParametrs());
             ViewData.Model = $"result = {result}";
