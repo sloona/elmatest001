@@ -7,28 +7,6 @@ using System.Threading.Tasks;
 
 namespace MyOperations
 {
-    public class MySum : IOperation
-    {
-        public string Name
-        {
-            get
-            {
-                return "MySum";
-            }
-        }
-
-        //public int ArgsNum { get { return 3; } }
-
-        public object Execute(object[] args)
-        {
-            return Convert.ToInt32(args[0]) + Convert.ToInt32(args[1]); //+ Convert.ToInt32(args[2]);
-        }
-
-        //public object Execute(object arg1, object arg2, object arg3)
-        //{
-        //    return Convert.ToInt32(arg1) + Convert.ToInt32(arg2) + Convert.ToInt32(arg3);
-        //}
-    }
 
     public class MyMultilpy : IOperation
     {
@@ -100,8 +78,24 @@ namespace MyOperations
             }
         }
     }
-    /// <summary>
-    /// Сложение комплексных чисел, четыре аргумента
-    /// </summary>
-   
+
+
+    public class DivOperation : IOperationCount
+    {
+        public int Count { get { return 2; } }
+
+        public string Name { get { return "Sum"; } }
+
+        public object Execute(object[] args)
+        {
+            var x = Convert.ToInt32(args[0]);
+
+            var y = Convert.ToInt32(args[1]);
+
+            return x + y + 5;
+        }
+
+    }
+
+
 }

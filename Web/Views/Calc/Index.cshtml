@@ -1,31 +1,25 @@
 ﻿@model Web.Models.OperationModel
 @{
     ViewBag.Title = "Index";
+    var operations = ViewBag.Operations as IEnumerable<SelectListItem>;
 }
 
-@{ 
-    
-}
-
-<h2>Index</h2>
+<h2>Калькулятор</h2>
 
 @using (Html.BeginForm("Execute", "Calc", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
-    @Html.AntiForgeryToken()
-    <hr />
 
-    @Html.ValidationSummary("", new { @class = "text-danger" })
+    @*@Html.ValidationSummary("", new { @class = "text-danger" })*@
     <div class="form-group">
         @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
-            @Html.DropDownListFor(m => m.Name, @Model.listNames, "")
+            @*@Html.TextBoxFor(m => m.Name, new { @class = "form-control" })*@
+            @Html.DropDownListFor(m => m.Name, operations, "")
         </div>
     </div>
 
-    @Html.EditorFor(m=>m.X, "ArgView")
-
+    @Html.EditorFor(m => m.X, "ArgView")
     @Html.EditorFor(m => m.Y, "ArgView")
-
 
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
