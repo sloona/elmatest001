@@ -24,8 +24,8 @@ namespace Web.Controllers
         public CalcController()
         {
 
-            var singlecalcalator = SingletonCalc.GetInstance();
-            Calculator = singlecalcalator.Calculator;
+            var singlecalculator = SingletonCalc.GetInstance();
+            Calculator = singlecalculator.Calculator;
 
             //var operations = new List<IOperation>();
 
