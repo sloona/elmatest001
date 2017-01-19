@@ -17,11 +17,11 @@ namespace MyOperations
             }
         }
 
-        public int ArgsNum { get { return 3; } }
+        //public int ArgsNum { get { return 3; } }
 
         public object Execute(object[] args)
         {
-            return Convert.ToInt32(args[0]) + Convert.ToInt32(args[1]) + Convert.ToInt32(args[2]);
+            return Convert.ToInt32(args[0]) + Convert.ToInt32(args[1]); //+ Convert.ToInt32(args[2]);
         }
 
         //public object Execute(object arg1, object arg2, object arg3)
@@ -40,7 +40,7 @@ namespace MyOperations
             }
         }
 
-        public int ArgsNum { get { return 2; } }
+        //public int ArgsNum { get { return 2; } }
 
         public object Execute(object[] args)
         {

@@ -273,6 +273,7 @@
     <Content Include="Views\Calc\Execute.cshtml" />
     <Content Include="Views\Calc\Index.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\ArgView.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\OperNamesView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
