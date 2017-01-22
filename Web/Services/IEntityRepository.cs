@@ -19,5 +19,9 @@ namespace Web.Services
         T Create();
 
         IEnumerable<T> GetAll();
+
+        T Load(int d);
+
+        bool Delete(int Id);
     }
 }

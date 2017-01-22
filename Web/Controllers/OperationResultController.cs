@@ -22,7 +22,7 @@ namespace Web.Controllers
             // нужно фильтровать операции - выводить только те, которые выполнялись дольше 1 секунды
 
             //var operations = repository.GetAll();
-            var operations = repository.GetAll().Where(o => o.ExecTimeMs > 2000).ToList();
+            var operations = repository.GetAll().Where(o => o.ExecTimeMs > 20).ToList();
 
             return View(operations);
         }

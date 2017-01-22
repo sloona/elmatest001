@@ -10,11 +10,13 @@ namespace Web.Services
 {
     public class OperationResultRepository : IEntityRepository<OperationResult>
     {
-        
 
-        public IEnumerable<OperationResult> GetAll() {
+
+        public IEnumerable<OperationResult> GetAll()
+        {
             var operations = new List<OperationResult>();
-            using (var db = new CalcContext()) {
+            using (var db = new CalcContext())
+            {
                 //operations = db.OperationResults.ToList();
                 operations = db.OperationResults.Include("Operation").ToList();
                 //operations = db.OperationResults.Include("Operation").AsNoTracking().ToList();
@@ -45,9 +47,30 @@ namespace Web.Services
             Operation operation;
             using (var db = new CalcContext())
             {
-              operation = db.Operations.Where(o => o.Name == name).FirstOrDefault();
+                operation = db.Operations.Where(o => o.Name == name).FirstOrDefault();
             }
             return operation;
+        }
+
+        public OperationResult Load(int Id)
+        {
+            using (var db = new CalcContext())
+            {
+                return db.OperationResults.FirstOrDefault(o => o.Id == Id);
+            }
+        }
+
+        public bool Delete(int Id)
+        {
+            var item = Load(Id);
+            if (item == null)
+                return false;
+            using (var db = new CalcContext())
+            {
+                db.OperationResults.Remove(item);
+                db.SaveChanges();
+            }
+            return true;
         }
     }
 }
