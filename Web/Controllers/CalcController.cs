@@ -9,23 +9,28 @@ using System.IO;
 using System.Reflection;
 using System.Web.Hosting;
 using SingletonCalculator;
+using Web.Services;
+using System.Diagnostics;
 
 namespace Web.Controllers
 {
     public class CalcController : Controller
     {
-        
+
 
         // GET: Calc
 
 
-        private Calc.Calc Calculator { get; set; }
+        //private Calc.Calc Calculator { get; set; }
+
+        private OperationResultRepository repository { get; set; }
 
         public CalcController()
         {
+            repository = new OperationResultRepository();
 
-            var singlecalculator = SingletonCalc.GetInstance();
-            Calculator = singlecalculator.Calculator;
+            // var singlecalculator = SingletonCalc.GetInstance();
+            // Calculator = singlecalculator.Calculator;
 
             //var operations = new List<IOperation>();
 
@@ -60,7 +65,7 @@ namespace Web.Controllers
 
         public ActionResult Index()
         {
-            var opers = Calculator.GetOperationsNames().Select(o => new SelectListItem() { Text = o, Value = o });
+            var opers = SingletonCalc.GetInstance().Calculator.GetOperationsNames().Select(o => new SelectListItem() { Text = o, Value = o });
             ViewBag.Operations = opers;
             return View(new OperationModel());
         }
@@ -72,7 +77,22 @@ namespace Web.Controllers
                 return View("Index", model);
             }
 
-            var result = Calculator.Execute(model.Name, model.GetParameters());
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Start();
+
+            var result = SingletonCalc.GetInstance().Calculator.Execute(model.Name, model.GetParameters());
+            var operResult = repository.Create();
+
+            operResult.ArgumentCount = model.GetParameters().Count();
+            operResult.Arguments = string.Join(",", model.GetParameters());
+            //operResult.OperationId = 1;
+            operResult.OperationId = repository.FindOperByName(model.Name).Id;
+            
+
+            operResult.Result = result.ToString();
+            operResult.ExecTimeMs = stopWatch.ElapsedMilliseconds;
+
+            repository.Update(operResult);
             ViewData.Model = $"result = {result}";
             return View();
         }
