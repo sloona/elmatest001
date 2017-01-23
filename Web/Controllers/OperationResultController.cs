@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using Web.Services;
+using Services;
 
 namespace Web.Controllers
 {
     public class OperationResultController : Controller
     {
-        private OperationResultRepository repository { get; set; }
+        private IOperationResultRepository repository { get; set; }
 
         public OperationResultController()
         {
-            repository = new OperationResultRepository();
+            repository = new NHOperationResultRepository();
         }
 
         // GET: OperationResult
@@ -21,8 +21,10 @@ namespace Web.Controllers
         {
             // нужно фильтровать операции - выводить только те, которые выполнялись дольше 1 секунды
 
-            //var operations = repository.GetAll();
-            var operations = repository.GetAll().Where(o => o.ExecTimeMs > 20).ToList();
+            var operations = repository.GetAll();
+            //var operations = repository.GetAll().Where(o => o.ExecTimeMs > 20).ToList();
+            //var operations = repository.GetAll().OrderByDescending(t=>t.Id).Take(5);
+            //var operations = repository.GetAll().OrderByDescending(t => t.Id);
 
             return View(operations);
         }

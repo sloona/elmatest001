@@ -4,13 +4,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Models;
 using Web.Models;
 using System.IO;
 using System.Reflection;
 using System.Web.Hosting;
 using SingletonCalculator;
-using Web.Services;
+using Services;
 using System.Diagnostics;
+
 
 namespace Web.Controllers
 {
@@ -23,43 +25,12 @@ namespace Web.Controllers
 
         //private Calc.Calc Calculator { get; set; }
 
-        private OperationResultRepository repository { get; set; }
+        private IOperationResultRepository repository { get; set; }
 
         public CalcController()
         {
-            repository = new OperationResultRepository();
-
-            // var singlecalculator = SingletonCalc.GetInstance();
-            // Calculator = singlecalculator.Calculator;
-
-            //var operations = new List<IOperation>();
-
-            //#region Получение всех возможных операций
-            //// найти файлы dll и exe в текущей директории
-            //var files = Directory.GetFiles(HostingEnvironment.MapPath("~/") + "\\App_Data", "*.dll");
-
-            ////загрузить их
-            //foreach (var file in files)
-            //{
-            //    // Console.WriteLine(file);
-            //    var assembly = Assembly.LoadFile(file);
-
-            //    foreach (var type in assembly.GetTypes().Where(t => t.IsClass))
-            //    {
-            //        // найти реализацюию интерфейса IOperation
-            //        var interfaces = type.GetInterfaces();
-            //        if (interfaces.Contains(typeof(IOperation)))
-            //        {
-            //            //создаем экземпляр класса и приводим к нужному интерфейсу
-            //            var oper = Activator.CreateInstance(type) as IOperation;
-            //            if (oper != null)
-            //            {
-            //                operations.Add(oper);
-            //            }
-            //        }
-            //    }
-            //}
-            //#endregion
+            //repository = new OperationResultRepository();
+            repository = new NHOperationResultRepository();
 
         }
 
@@ -85,8 +56,10 @@ namespace Web.Controllers
 
             operResult.ArgumentCount = model.GetParameters().Count();
             operResult.Arguments = string.Join(",", model.GetParameters());
-            //operResult.OperationId = 1;
-            operResult.OperationId = repository.FindOperByName(model.Name).Id;
+            //operResult.OperationId = 2;
+            //operResult.UserId = 2;
+            operResult.User = repository.FindUserById(2);
+            operResult.Operation = repository.FindOperByName(model.Name);
             
 
             operResult.Result = result.ToString();
